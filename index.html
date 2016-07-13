@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>beautyCo.js</title>
+
+	<script src="./beautyCo.js"></script>
+	<style>
+		label{display:block;margin:5px 0 2px 0}
+		.hidden{display:none}
+		input{width:400px;font-size:90%}
+		input,#companyNameBtn{margin:0;padding:0;height:30px}
+		#companyNameBtn{width:30px;font-size:90%;border:1px solid #EEE;background-color:#FFF;margin-left:15px}
+		#result{margin-top:30px}
+		fieldset{border:none;margin-bottom:0}
+		#git{margin-top:30px}
+	</style>
+</head>
+<body>
+	<h1>beautyCo.js</h1>
+	<h3>Пример работы с формой</h3>
+	<form>
+		<label for="companyName">Введите полное название организации</label>
+		<input type="text" autocomplete="off" id="companyName" /><button type="button" autocomplete="off" disabled id="companyNameBtn">▼</button>
+		<fieldset class="hidden" id="additional">
+			<label for="shortName">Название без кавычек</label>
+			<input type="text" autocomplete="off" id="shortName" />
+			<label for="abbr">Аббревиатура</label>
+			<input type="text" autocomplete="off" id="companyAbbr" />
+		</fieldset>
+
+		<div id="result"></div>
+	</form>
+
+	<h2>Как работает?</h2>
+	<p>Скрипт убирает из названия компании лишние пробелы, обрабатывает кавычки, разбивает его на составные части и перестраивает так, чтобы оно легко читалось.</p>
+	<p id="git">Ссылка на <a href="https://github.com/spearance/beautyCo">GitHub</a></p>
+
+	<script>
+		var nameField = document.querySelector('#companyName');
+		var resultText = document.querySelector('#result');
+		var companyNameBtn = document.querySelector('#companyNameBtn');
+		var additional = document.querySelector('#additional');
+		var shortName = document.querySelector('#shortName');
+		var companyAbbr = document.querySelector('#companyAbbr');
+
+		nameField.oninput = parseName;
+		nameField.onpaste = parseName;
+
+		function parseName(){
+			resultText.innerText = '';
+
+			if(this.value){
+				var company = beautyCo(this.value);
+
+				shortName.value = company.name;
+				companyAbbr.value = company.type;
+
+				companyNameBtn.addEventListener('click', showAdditional);
+
+				resultText.innerText = company.type !== '' ? company.name + ', ' + company.type : company.fullName;
+			} else {
+				companyNameBtn.removeEventListener('click', showAdditional);
+				additional.classList.add('hidden');
+			}
+
+			companyNameBtn.disabled = !this.value;
+		}
+
+		function showAdditional(){
+			if(additional.classList.contains('hidden')){
+				additional.classList.remove('hidden');
+			} else {
+				additional.classList.add('hidden');
+			}
+		}
+	</script>
+</body>
+</html>
