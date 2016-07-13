@@ -5,6 +5,8 @@
 	<title>beautyCo.js</title>
 
 	<script src="./beautyCo.js"></script>
+	<script src="./antiPE.js"></script>
+
 	<style>
 		label{display:block;margin:5px 0 2px 0}
 		.hidden{display:none}
@@ -18,7 +20,9 @@
 </head>
 <body>
 	<h1>beautyCo.js</h1>
+
 	<h3>Пример работы с формой</h3>
+
 	<form>
 		<label for="companyName">Введите полное название организации</label>
 		<input type="text" autocomplete="off" id="companyName" /><button type="button" autocomplete="off" disabled id="companyNameBtn">▼</button>
@@ -34,6 +38,7 @@
 
 	<h2>Как работает?</h2>
 	<p>Скрипт убирает из названия компании лишние пробелы, обрабатывает кавычки, разбивает его на составные части и перестраивает так, чтобы оно легко читалось.</p>
+	<p>Дополнительно используется скрипт <a href="https://github.com/spearance/antiPE">antiPE.js</a>, который меняет латинские символы «дублёры» на их кириллические аналоги.</p>
 	<p id="git">Ссылка на <a href="https://github.com/spearance/beautyCo">GitHub</a></p>
 
 	<script>
@@ -51,7 +56,7 @@
 			resultText.innerText = '';
 
 			if(this.value){
-				var company = beautyCo(this.value);
+				var company = beautyCo(antiPE(this.value));
 
 				shortName.value = company.name;
 				companyAbbr.value = company.type;

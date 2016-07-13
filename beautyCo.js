@@ -42,9 +42,16 @@ function beautyCo(str){
 		.replace(/муниципальное\sунитарное\sпредприятие/i, 'МУП')
 		.replace(/государственное\sунитарное\sпредприятие/i, 'ГУП')
 		.replace(/автономная\sнекоммерческая\sорганизация/i, 'АНО')
+
+		.replace(/^(ооо|одо|зао|нао|пао|оао|ао|ип|пт|кт|маоу|моу|мадоу|адоу|доу|мбу|муп|гуп|ано)[ ]/, function(str, $1){
+			return $1.toUpperCase() + ' ';
+		})
+
 		.replace(/^((?:[А-ЯЁ]{2,} )+)([„«'"“]?.+?)$/, function(str, $1, $2){
 			obj.type = $1.trim();
-			obj.name = $2;
+			obj.name = $2.replace(/([а-яё])/, function(str, $1){
+				return $1.toUpperCase();
+			});
 			return '';
 		});
 
