@@ -49,7 +49,7 @@ function beautyCo(str){
 
 		.replace(/^((?:[А-ЯЁ]{2,} )+)([„«'"“]?.+?)$/, function(str, $1, $2){
 			obj.type = $1.trim();
-			obj.name = $2.replace(/([а-яё])/, function(str, $1){
+			obj.name = $2.replace(/([a-zа-яё]+)/, function(str, $1){
 				return $1.toUpperCase();
 			});
 			return '';
