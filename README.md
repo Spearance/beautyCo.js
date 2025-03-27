@@ -2,4 +2,4 @@
 
 Бьютифаер для названий компаний.
 
-[Демо](http://spearance.ru/parser3/beautyCo/)
+[Демо](https://spearance.github.io/beautyCo.js)

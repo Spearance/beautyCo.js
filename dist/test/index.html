@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Test beautyCo.js</title>
+
+  <script src="../beautyCo.js"></script>
+  <script src="../antiPE.js"></script>
+</head>
+
+<body>
+  <h1>Test beautyCo.js</h1>
+
+  <div id="result"><p><b>Было</b> → <b>Стало</b></p></div>
+
+  <p id="git">Ссылка на <a href="https://github.com/spearance/beautyCo">GitHub</a></p>
+
+  <script>
+    var a = ['ИП Лепешкин Евгений Александрович',
+      'Общество с ограниченной ответственностью "Тёпленькая пошла"',
+      'Закрытое акционерное общество "Секта"',
+      'ООО "Абатское пассажирское автотранспортное предприятие"',
+      'ООО "НАПЛЕВАНТЕ"',
+      'ооо капсу нет',
+      'Общество с ограниченной ответственностью "Фирма "веников не вяжет"',
+      'НОУ автошкола "Приехали"',
+      'ООО "АО"',
+      'ООО " Приплыли ёжики"',
+      'АДМИНИСТРАЦИЯ  ЗАБРОШЕННОГО СЕЛЬСКОГО ПОСЕЛЕНИЯ',
+      'Муниципальное автономное общеобразовательное учреждение Текутьевская основная общеобразовательная школа',
+      'Общество с ограниченной ответственностью «Альмира»',
+      'ИП Андреев К.В.',
+      'АНО ДПО "УЦ ЗАБН"',
+      'Общество с ограниченной ответственностью «Кавычки» вначале»'
+    ];
+
+    var resultText = document.querySelector('#result');
+
+    b = a.map(function(item) {
+      var company = beautyCo(item);
+      return printCoName(company);
+    });
+
+    b.forEach(function(item, index) {
+      var para = document.createElement('p');
+      para.innerText = a[index] + ' → ' + item;
+      resultText.appendChild(para);
+    });
+  </script>
+</body>
+
+</html>
